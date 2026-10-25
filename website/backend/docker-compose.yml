@@ -1,0 +1,23 @@
+# Development stack for the RememberMe backend.
+# Uses the host network so the Django container can reach:
+#   - PostgreSQL from ../../db/docker-compose.yml on localhost:5432
+#   - Redis (below) on localhost:6379
+services:
+  backend:
+    build: .
+    container_name: rememberme-backend
+    network_mode: host
+    user: "${DOCKER_UID:-1000}:${DOCKER_GID:-1000}"
+    environment:
+      HOME: /tmp
+    volumes:
+      - .:/app
+    env_file:
+      - .env
+    command: python manage.py runserver 0.0.0.0:8000
+
+  redis:
+    image: redis:7-alpine
+    container_name: rememberme-redis
+    network_mode: host
+    restart: unless-stopped
