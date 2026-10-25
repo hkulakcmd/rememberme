@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply min-h-dvh bg-canvas font-sans text-ink antialiased;
+    background-image:
+      radial-gradient(52rem 52rem at 110% -12%, rgba(139, 92, 246, 0.1), transparent 62%),
+      radial-gradient(46rem 46rem at -12% 0%, rgba(251, 113, 133, 0.12), transparent 58%),
+      radial-gradient(40rem 40rem at 50% 120%, rgba(52, 211, 153, 0.08), transparent 60%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background-color: theme('colors.brand.200');
+    color: theme('colors.ink');
+  }
+
+  body {
+    overflow-x: clip;
+    overflow-wrap: break-word;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  a,
+  button,
+  input,
+  select,
+  textarea {
+    touch-action: manipulation;
+  }
+
+  html {
+    scroll-padding-top: 5rem;
+  }
+
+  /* Keep native focus visible for links and controls without custom rings. */
+  :focus-visible {
+    outline: 2px solid theme('colors.lavender.500');
+    outline-offset: 2px;
+  }
+}
+
+@layer utilities {
+  .safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@media (max-width: 1023.98px) {
+  .pb-safe-nav {
+    padding-bottom: calc(7rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (max-width: 639.98px) {
+  .toast-safe-bottom {
+    bottom: calc(5.75rem + env(safe-area-inset-bottom));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

@@ -10,4 +10,5 @@ media/
 .coverage
 htmlcov/
 *.log
+*.swp
 .DS_Store
